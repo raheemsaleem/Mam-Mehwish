@@ -6,14 +6,270 @@
   <meta name="description" content="Mehwish - Researcher, Marketer & Developer | M.Phil Business Administration | Web & App Development | Digital Solutions. Expert in brand strategy, consumer behavior, and full-stack development.">
   <meta name="author" content="Mehwish">
   <title>Mehwish | Consultant - Researcher, Marketer & Developer</title>
-  <!-- Bootstrap 5 + Icons + Google Fonts + AOS -->
+  <!-- Bootstrap 5 + Icons + Google Fonts + AOS (hardened CDNs) -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <link rel="stylesheet" href="CSS/css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      color: #1e2a3e;
+      scroll-behavior: smooth;
+    }
+    h1, h2, h3, h4, h5, .navbar-brand, .section-title {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+    }
+    .section-title {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      position: relative;
+      display: inline-block;
+      background: linear-gradient(135deg, #0d47a1, #ffb300);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 0;
+      width: 70px;
+      height: 4px;
+      background: linear-gradient(90deg, #0d47a1, #ffb300);
+      border-radius: 2px;
+    }
+    /* Navbar */
+    .navbar {
+      transition: all 0.4s ease;
+      padding: 1rem 0;
+      z-index: 999;
+    }
+    .navbar.scrolled {
+      background: rgba(255,255,255,0.98) !important;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      padding: 0.6rem 0;
+    }
+    .navbar.scrolled .nav-link, .navbar.scrolled .navbar-brand {
+      color: #0d47a1 !important;
+    }
+    .navbar .nav-link {
+      font-weight: 500;
+      margin: 0 0.25rem;
+      transition: 0.3s;
+      color: white !important;
+    }
+    .navbar.scrolled .nav-link {
+      color: #0d2e5f !important;
+    }
+    .navbar .nav-link:hover {
+      color: #ffb300 !important;
+    }
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(rgba(13, 71, 161, 0.75), rgba(0, 0, 0, 0.65)), url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: white;
+      position: relative;
+    }
+    .hero-content {
+      animation: fadeInUp 1.2s ease-out;
+    }
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(30px);}
+      100% { opacity: 1; transform: translateY(0);}
+    }
+    .btn-gold {
+      background: #ffb300;
+      color: #0d47a1;
+      font-weight: 600;
+      padding: 12px 32px;
+      border-radius: 40px;
+      transition: all 0.3s;
+      border: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    .btn-gold:hover {
+      background: #e6a100;
+      transform: translateY(-3px);
+      color: #0d2e5f;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+    .btn-outline-gold {
+      border: 2px solid #ffb300;
+      color: #ffb300;
+      border-radius: 40px;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+    .btn-outline-gold:hover {
+      background: #ffb300;
+      color: #0d47a1;
+    }
+    /* Floating WhatsApp */
+    .float-wa {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background-color: #25d366;
+      color: white;
+      border-radius: 50px;
+      padding: 12px 20px;
+      font-weight: 600;
+      z-index: 1000;
+      box-shadow: 0 5px 18px rgba(37,211,102,0.4);
+      transition: 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+    .float-wa:hover {
+      transform: scale(1.05);
+      background-color: #20b959;
+      color: white;
+    }
+    /* cards & services */
+    .service-card, .project-card, .vu-card, .price-card {
+      background: #fff;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+      height: 100%;
+      border: none;
+    }
+    .service-card:hover, .price-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 30px -12px rgba(0,0,0,0.15);
+    }
+    .project-card {
+      overflow: hidden;
+      border-radius: 20px;
+    }
+    .project-card img {
+      transition: transform 0.5s ease;
+      height: 200px;
+      object-fit: cover;
+      width: 100%;
+    }
+    .project-card:hover img {
+      transform: scale(1.08);
+    }
+    .icon-lg {
+      font-size: 2.8rem;
+      color: #0d47a1;
+    }
+    /* timeline */
+    .timeline-item {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    .timeline-icon {
+      width: 55px;
+      height: 55px;
+      background: #0d47a1;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffb300;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+      box-shadow: 0 5px 12px rgba(13,71,161,0.3);
+    }
+    .timeline-content {
+      background: #f8fafc;
+      padding: 1rem 1.5rem;
+      border-radius: 16px;
+      width: 100%;
+      border-left: 3px solid #ffb300;
+    }
+    /* progress bars */
+    .progress {
+      height: 10px;
+      border-radius: 10px;
+      background-color: #e9ecef;
+      margin-top: 8px;
+    }
+    .progress-bar {
+      background: linear-gradient(90deg, #0d47a1, #ffb300);
+      border-radius: 10px;
+      width: 0%;
+      transition: width 1s ease-in-out;
+    }
+    .skill-item {
+      margin-bottom: 1.2rem;
+    }
+    /* footer */
+    footer {
+      background: #0a2a44;
+      color: #ddd;
+    }
+    .social-icon {
+      color: white;
+      background: #ffb30020;
+      width: 40px;
+      height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: 0.3s;
+      margin: 0 6px;
+      text-decoration: none;
+    }
+    .social-icon:hover {
+      background: #ffb300;
+      color: #0d47a1;
+      transform: translateY(-3px);
+    }
+    /* pricing cards special */
+    .price-card {
+      text-align: center;
+      padding: 1.5rem;
+      background: white;
+      border-top: 5px solid #ffb300;
+    }
+    .price-card .badge-gold {
+      background: #ffb300;
+      color: #0d47a1;
+      font-weight: 600;
+    }
+    .contact-number {
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+    @media (max-width: 768px) {
+      .section-title { font-size: 2rem; }
+      .hero h1 { font-size: 2rem; }
+      .timeline-item { flex-direction: column; align-items: flex-start; }
+      .timeline-icon { margin-bottom: 0.5rem; }
+      .float-wa { padding: 8px 16px; font-size: 0.85rem; right: 15px; bottom: 15px; }
+    }
+  </style>
 </head>
 <body>
+
+<!-- Floating WhatsApp Button -->
+<a href="https://wa.me/923184148783?text=Hello%20Mehwish,%20I%20need%20your%20expert%20consulting%20services" class="float-wa" target="_blank">
+  <i class="fab fa-whatsapp fa-lg"></i> Chat on WhatsApp
+</a>
 
 <!-- Sticky Navbar -->
 <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
@@ -202,7 +458,10 @@
           <hr>
           <h5>Office Hours</h5>
           <p>Mon-Fri: 10am - 7pm (PKT) | Online support available.</p>
-          <div class="mt-3"><a href="https://wa.me/923184148783?text=Hi%20Mehwish,%20I%20need%20consultation" class="btn btn-outline-gold" target="_blank"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a></div>
+          <div class="mt-3 d-flex gap-3 flex-wrap">
+            <a href="https://wa.me/923184148783?text=Hi%20Mehwish,%20I%20need%20consultation" class="btn btn-outline-gold" target="_blank"><i class="fab fa-whatsapp"></i> Chat 03184148783</a>
+            <a href="https://wa.me/923171491481?text=Hi%20Mehwish,%20I%20need%20help" class="btn btn-outline-secondary" target="_blank"><i class="fab fa-whatsapp"></i> 03171491481</a>
+          </div>
         </div>
       </div>
       <div class="col-md-6" data-aos="fade-left">
@@ -233,9 +492,78 @@
   </div>
 </footer>
 
-<!-- Scripts -->
+<!-- Scripts: Bootstrap, AOS, and custom -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script type="module" src="JS/script.js"></script>
+<script>
+  // Initialize AOS
+  AOS.init({ duration: 800, once: true, offset: 100 });
+  
+  // Navbar scroll effect
+  window.addEventListener('scroll', function() {
+    const nav = document.getElementById('mainNav');
+    if (window.scrollY > 50) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+  
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+  
+  // Animated progress bars (Intersection Observer)
+  const progressBars = document.querySelectorAll('.progress-bar');
+  const animateSkills = () => {
+    progressBars.forEach(bar => {
+      const percent = bar.getAttribute('data-skill');
+      if (percent && bar.style.width === '0px' || bar.style.width === '' || parseFloat(bar.style.width) === 0) {
+        bar.style.width = percent + '%';
+      }
+    });
+  };
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateSkills();
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  const skillsSection = document.getElementById('skills');
+  if (skillsSection) observer.observe(skillsSection);
+  
+  // Also trigger on load if visible
+  window.addEventListener('load', () => {
+    if (skillsSection && skillsSection.getBoundingClientRect().top < window.innerHeight) animateSkills();
+  });
+  
+  // Contact Form Validation
+  const form = document.getElementById('contactForm');
+  const feedback = document.getElementById('formFeedback');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+    if (!name || !email || !message) {
+      feedback.innerHTML = '<span class="text-danger">All fields are required!</span>';
+      return;
+    }
+    const emailPattern = /^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/;
+    if (!emailPattern.test(email)) {
+      feedback.innerHTML = '<span class="text-danger">Enter a valid email address.</span>';
+      return;
+    }
+    feedback.innerHTML = '<span class="text-success">✅ Message sent! Mehwish will contact you soon.</span>';
+    form.reset();
+    setTimeout(() => feedback.innerHTML = '', 4000);
+  });
+</script>
 </body>
 </html>
