@@ -3,15 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Mehwish - Researcher, Marketer & Developer | M.Phil Business Administration | Web & App Development | Digital Solutions. Expert in brand strategy, consumer behavior, and full-stack development.">
-  <meta name="author" content="Mehwish">
+  <meta name="description" content="Mehwish - Researcher, Marketer & Developer | M.Phil Business Administration | Web & App Development | Digital Solutions">
   <title>Mehwish | Consultant - Researcher, Marketer & Developer</title>
-  <!-- Bootstrap 5 + Icons + Google Fonts + AOS (hardened CDNs) -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Only external icons & fonts (optional, won't break layout) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <style>
+    /* ========== RESET & GLOBAL ========== */
     * {
       margin: 0;
       padding: 0;
@@ -22,20 +20,27 @@
       overflow-x: hidden;
       color: #1e2a3e;
       scroll-behavior: smooth;
+      background: #ffffff;
     }
-    h1, h2, h3, h4, h5, .navbar-brand, .section-title {
+    h1, h2, h3, h4, h5, .navbar-brand {
       font-family: 'Poppins', sans-serif;
       font-weight: 600;
     }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
     .section-title {
       font-size: 2.5rem;
-      margin-bottom: 2rem;
-      position: relative;
-      display: inline-block;
+      font-weight: 700;
       background: linear-gradient(135deg, #0d47a1, #ffb300);
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
+      display: inline-block;
+      margin-bottom: 2rem;
+      position: relative;
     }
     .section-title:after {
       content: '';
@@ -47,33 +52,81 @@
       background: linear-gradient(90deg, #0d47a1, #ffb300);
       border-radius: 2px;
     }
-    /* Navbar */
+    .text-center { text-align: center; }
+    .bg-light { background: #f9fbfe; }
+    .py-5 { padding-top: 4rem; padding-bottom: 4rem; }
+    .mt-3 { margin-top: 1rem; }
+    .mt-4 { margin-top: 1.5rem; }
+    .mb-3 { margin-bottom: 1rem; }
+    .mb-4 { margin-bottom: 1.5rem; }
+    .fw-bold { font-weight: 700; }
+    /* ========== NAVBAR ========== */
     .navbar {
-      transition: all 0.4s ease;
+      position: fixed;
+      top: 0;
+      width: 100%;
       padding: 1rem 0;
+      transition: all 0.4s ease;
       z-index: 999;
+      background: transparent;
     }
     .navbar.scrolled {
-      background: rgba(255,255,255,0.98) !important;
+      background: rgba(255,255,255,0.98);
       box-shadow: 0 8px 20px rgba(0,0,0,0.08);
       padding: 0.6rem 0;
     }
-    .navbar.scrolled .nav-link, .navbar.scrolled .navbar-brand {
-      color: #0d47a1 !important;
+    .navbar .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
     }
-    .navbar .nav-link {
+    .navbar-brand {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: white;
+      text-decoration: none;
+    }
+    .navbar.scrolled .navbar-brand {
+      color: #0d47a1;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: white;
+      text-decoration: none;
       font-weight: 500;
-      margin: 0 0.25rem;
       transition: 0.3s;
-      color: white !important;
     }
-    .navbar.scrolled .nav-link {
-      color: #0d2e5f !important;
+    .navbar.scrolled .nav-links a {
+      color: #0d2e5f;
     }
-    .navbar .nav-link:hover {
-      color: #ffb300 !important;
+    .nav-links a:hover { color: #ffb300; }
+    .menu-toggle {
+      display: none;
+      font-size: 1.8rem;
+      color: white;
+      cursor: pointer;
     }
-    /* Hero */
+    @media (max-width: 768px) {
+      .menu-toggle { display: block; }
+      .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        background: rgba(255,255,255,0.95);
+        padding: 1rem;
+        margin-top: 1rem;
+        border-radius: 20px;
+      }
+      .navbar.scrolled .nav-links { background: white; }
+      .nav-links.show { display: flex; }
+      .nav-links a { color: #0d47a1 !important; padding: 0.5rem 0; }
+    }
+    /* ========== HERO ========== */
     .hero {
       min-height: 100vh;
       background: linear-gradient(rgba(13, 71, 161, 0.75), rgba(0, 0, 0, 0.65)), url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
@@ -83,7 +136,6 @@
       align-items: center;
       text-align: center;
       color: white;
-      position: relative;
     }
     .hero-content {
       animation: fadeInUp 1.2s ease-out;
@@ -98,87 +150,82 @@
       font-weight: 600;
       padding: 12px 32px;
       border-radius: 40px;
-      transition: all 0.3s;
+      transition: 0.3s;
+      display: inline-block;
+      text-decoration: none;
       border: none;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      cursor: pointer;
     }
     .btn-gold:hover {
       background: #e6a100;
       transform: translateY(-3px);
-      color: #0d2e5f;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
     }
     .btn-outline-gold {
       border: 2px solid #ffb300;
       color: #ffb300;
       border-radius: 40px;
-      font-weight: 500;
-      transition: 0.3s;
-    }
-    .btn-outline-gold:hover {
-      background: #ffb300;
-      color: #0d47a1;
-    }
-    /* Floating WhatsApp */
-    .float-wa {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      background-color: #25d366;
-      color: white;
-      border-radius: 50px;
-      padding: 12px 20px;
-      font-weight: 600;
-      z-index: 1000;
-      box-shadow: 0 5px 18px rgba(37,211,102,0.4);
-      transition: 0.3s;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      padding: 8px 20px;
       text-decoration: none;
-      font-size: 1rem;
+      font-weight: 500;
     }
-    .float-wa:hover {
-      transform: scale(1.05);
-      background-color: #20b959;
-      color: white;
+    /* ========== GRID SYSTEM (self-made) ========== */
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-top: 1rem;
     }
-    /* cards & services */
+    .col-3, .col-4, .col-6 {
+      flex: 1;
+      min-width: 250px;
+    }
+    @media (min-width: 768px) {
+      .col-3 { flex: 0 0 calc(25% - 1.5rem); }
+      .col-4 { flex: 0 0 calc(33.333% - 1.5rem); }
+      .col-6 { flex: 0 0 calc(50% - 1.5rem); }
+    }
+    /* ========== CARDS ========== */
     .service-card, .project-card, .vu-card, .price-card {
-      background: #fff;
+      background: white;
       border-radius: 20px;
-      transition: all 0.3s ease;
+      padding: 1.8rem;
       box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+      transition: all 0.3s;
       height: 100%;
-      border: none;
     }
     .service-card:hover, .price-card:hover {
       transform: translateY(-8px);
       box-shadow: 0 20px 30px -12px rgba(0,0,0,0.15);
     }
     .project-card {
+      padding: 0;
       overflow: hidden;
-      border-radius: 20px;
     }
     .project-card img {
-      transition: transform 0.5s ease;
+      width: 100%;
       height: 200px;
       object-fit: cover;
-      width: 100%;
+      transition: 0.5s;
     }
-    .project-card:hover img {
-      transform: scale(1.08);
+    .project-card:hover img { transform: scale(1.08); }
+    .project-card .p-3 { padding: 1rem; }
+    .price-card {
+      text-align: center;
+      border-top: 5px solid #ffb300;
     }
     .icon-lg {
       font-size: 2.8rem;
       color: #0d47a1;
     }
-    /* timeline */
+    /* ========== TIMELINE ========== */
     .timeline-item {
       display: flex;
       gap: 1.5rem;
       margin-bottom: 2rem;
-      position: relative;
+      background: #f8fafc;
+      padding: 1rem 1.5rem;
+      border-radius: 16px;
+      border-left: 3px solid #ffb300;
     }
     .timeline-icon {
       width: 55px;
@@ -191,287 +238,268 @@
       color: #ffb300;
       font-size: 1.5rem;
       flex-shrink: 0;
-      box-shadow: 0 5px 12px rgba(13,71,161,0.3);
     }
-    .timeline-content {
-      background: #f8fafc;
-      padding: 1rem 1.5rem;
-      border-radius: 16px;
-      width: 100%;
-      border-left: 3px solid #ffb300;
+    @media (max-width: 768px) {
+      .timeline-item { flex-direction: column; }
     }
-    /* progress bars */
+    /* ========== PROGRESS BARS ========== */
+    .skill-item { margin-bottom: 1.2rem; }
     .progress {
+      background: #e9ecef;
       height: 10px;
       border-radius: 10px;
-      background-color: #e9ecef;
       margin-top: 8px;
     }
     .progress-bar {
       background: linear-gradient(90deg, #0d47a1, #ffb300);
-      border-radius: 10px;
       width: 0%;
-      transition: width 1s ease-in-out;
+      height: 100%;
+      border-radius: 10px;
+      transition: width 1s ease;
     }
-    .skill-item {
-      margin-bottom: 1.2rem;
+    /* ========== FLOATING WHATSAPP ========== */
+    .float-wa {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: #25d366;
+      color: white;
+      border-radius: 50px;
+      padding: 12px 20px;
+      font-weight: 600;
+      z-index: 1000;
+      display: flex;
+      gap: 10px;
+      text-decoration: none;
+      box-shadow: 0 5px 18px rgba(37,211,102,0.4);
     }
-    /* footer */
+    /* ========== CAROUSEL (manual) ========== */
+    .carousel {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .carousel-inner {
+      overflow: hidden;
+    }
+    .carousel-item {
+      display: none;
+      background: white;
+      padding: 2rem;
+      border-radius: 28px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    }
+    .carousel-item.active {
+      display: block;
+      animation: fade 0.5s;
+    }
+    @keyframes fade {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+    .carousel-control {
+      background: #0d47a1;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .prev { left: -20px; }
+    .next { right: -20px; }
+    /* ========== FOOTER ========== */
     footer {
       background: #0a2a44;
       color: #ddd;
+      padding: 3rem 0 2rem;
     }
     .social-icon {
-      color: white;
-      background: #ffb30020;
+      display: inline-flex;
       width: 40px;
       height: 40px;
-      display: inline-flex;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
       align-items: center;
       justify-content: center;
-      border-radius: 50%;
+      margin: 0 5px;
+      color: white;
       transition: 0.3s;
-      margin: 0 6px;
       text-decoration: none;
     }
     .social-icon:hover {
       background: #ffb300;
       color: #0d47a1;
-      transform: translateY(-3px);
     }
-    /* pricing cards special */
-    .price-card {
-      text-align: center;
-      padding: 1.5rem;
-      background: white;
-      border-top: 5px solid #ffb300;
-    }
-    .price-card .badge-gold {
-      background: #ffb300;
-      color: #0d47a1;
-      font-weight: 600;
-    }
-    .contact-number {
-      font-size: 0.95rem;
-      word-break: break-word;
-    }
+    .text-white-50 { color: rgba(255,255,255,0.7); }
+    /* ========== RESPONSIVE ========== */
     @media (max-width: 768px) {
       .section-title { font-size: 2rem; }
-      .hero h1 { font-size: 2rem; }
-      .timeline-item { flex-direction: column; align-items: flex-start; }
-      .timeline-icon { margin-bottom: 0.5rem; }
-      .float-wa { padding: 8px 16px; font-size: 0.85rem; right: 15px; bottom: 15px; }
+      .hero h1 { font-size: 1.8rem; }
+      .row { gap: 1rem; }
     }
   </style>
 </head>
 <body>
 
-<!-- Floating WhatsApp Button -->
-<a href="https://wa.me/923184148783?text=Hello%20Mehwish,%20I%20need%20your%20expert%20consulting%20services" class="float-wa" target="_blank">
-  <i class="fab fa-whatsapp fa-lg"></i> Chat on WhatsApp
+<!-- Floating WhatsApp -->
+<a href="https://wa.me/923184148783?text=Hello%20Mehwish" class="float-wa" target="_blank">
+  <i class="fab fa-whatsapp fa-lg"></i> Chat Now
 </a>
 
-<!-- Sticky Navbar -->
-<nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+<!-- Navbar -->
+<nav class="navbar" id="mainNav">
   <div class="container">
-    <a class="navbar-brand fw-bold" href="#" style="color: white; font-size: 1.6rem;">Mehwish<span style="color:#ffb300;">.</span></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-        <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
-        <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
-        <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
-        <li class="nav-item"><a class="nav-link" href="#vu-projects">VU Projects</a></li>
-        <li class="nav-item"><a class="nav-link" href="#vu-lms">LMS Handling</a></li>
-        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-      </ul>
-    </div>
+    <a class="navbar-brand" href="#">Mehwish<span style="color:#ffb300;">.</span></a>
+    <div class="menu-toggle" id="menuToggle">☰</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#vu-projects">VU Projects</a></li>
+      <li><a href="#vu-lms">LMS Handling</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
   </div>
 </nav>
 
-<!-- Hero Section -->
+<!-- Hero -->
 <section id="home" class="hero">
   <div class="container hero-content">
-    <h1 class="display-4 fw-bold">Mehwish | Researcher, Marketer & Developer</h1>
+    <h1 class="fw-bold" style="font-size: 3rem;">Mehwish | Researcher, Marketer & Developer</h1>
     <p class="lead mt-3 fs-4">M.Phil Business Administration | Web & App Development | Digital Solutions</p>
-    <a href="#contact" class="btn btn-gold mt-4 btn-lg">Hire Me <i class="fas fa-arrow-right ms-2"></i></a>
+    <a href="#contact" class="btn-gold mt-4">Hire Me <i class="fas fa-arrow-right ms-2"></i></a>
   </div>
 </section>
 
-<!-- About Section -->
-<section id="about" class="py-5" style="background: #f9fbfe;">
-  <div class="container" data-aos="fade-up">
-    <div class="row align-items-center">
-      <div class="col-lg-8 mx-auto text-center">
-        <h2 class="section-title">About Me</h2>
-        <p class="fs-5">I'm Mehwish, an M.Phil in Business Administration with a deep focus on brand hate, consumer skepticism, and sustainability. Alongside academic research, I hold an MBA in Finance and bring robust experience in digital transformation. As a researcher, marketer, and developer, I bridge the gap between strategic insights and technical execution — delivering impactful web, app, and research solutions.</p>
-        <p class="mt-3 fst-italic">“Transforming data into growth, skepticism into trust, and ideas into seamless digital experiences.”</p>
-      </div>
-    </div>
+<!-- About -->
+<section id="about" class="py-5">
+  <div class="container text-center">
+    <h2 class="section-title">About Me</h2>
+    <p class="fs-5" style="max-width: 800px; margin: 0 auto;">I'm Mehwish, an M.Phil in Business Administration with a deep focus on brand hate, consumer skepticism, and sustainability. Alongside academic research, I hold an MBA in Finance and bring robust experience in digital transformation. As a researcher, marketer, and developer, I bridge the gap between strategic insights and technical execution — delivering impactful web, app, and research solutions.</p>
+    <p class="mt-3 fst-italic">“Transforming data into growth, skepticism into trust, and ideas into seamless digital experiences.”</p>
   </div>
 </section>
 
-<!-- Services Section -->
-<section id="services" class="py-5">
-  <div class="container">
-    <div class="text-center" data-aos="fade-up">
-      <h2 class="section-title">What I Offer</h2>
-    </div>
-    <div class="row g-4 mt-3">
-      <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
-        <div class="service-card p-4 text-center">
-          <i class="fas fa-chart-line icon-lg mb-3"></i>
-          <h4>Research & Business Analysis</h4>
-          <p>Market research, consumer behavior analytics, brand hate & sustainability studies, and data-driven strategy.</p>
-        </div>
-      </div>
-      <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
-        <div class="service-card p-4 text-center">
-          <i class="fas fa-code icon-lg mb-3"></i>
-          <h4>Web Development</h4>
-          <p>Modern responsive websites, Bootstrap, JavaScript, and full-stack solutions with performance focus.</p>
-        </div>
-      </div>
-      <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300">
-        <div class="service-card p-4 text-center">
-          <i class="fas fa-mobile-alt icon-lg mb-3"></i>
-          <h4>App Development</h4>
-          <p>Cross-platform mobile apps, UI/UX design, and hybrid solutions for startups and enterprises.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Education & Research Timeline -->
-<section id="education" class="py-5 bg-light">
-  <div class="container">
-    <div class="text-center" data-aos="fade-up">
-      <h2 class="section-title">Education & Research</h2>
-    </div>
-    <div class="row justify-content-center mt-4">
-      <div class="col-lg-10">
-        <div class="timeline-item" data-aos="fade-right">
-          <div class="timeline-icon"><i class="fas fa-graduation-cap"></i></div>
-          <div class="timeline-content"><h4>M.Phil Business Administration</h4><p>Specialization: Brand Hate, Consumer Skepticism & Sustainability. Thesis on mitigating brand hate through sustainable strategies.</p><small class="text-muted">2022 – Present</small></div>
-        </div>
-        <div class="timeline-item" data-aos="fade-left">
-          <div class="timeline-icon"><i class="fas fa-chart-line"></i></div>
-          <div class="timeline-content"><h4>MBA Finance</h4><p>Gold medalist, corporate finance, investment analysis, and strategic financial management.</p><small class="text-muted">2018 – 2020</small></div>
-        </div>
-        <div class="timeline-item" data-aos="fade-right">
-          <div class="timeline-icon"><i class="fas fa-book-open"></i></div>
-          <div class="timeline-content"><h4>Publications & Research</h4><p>• Brand Hate & Consumer Skepticism – Journal of Marketing Insights (2023)<br>• Sustainability in Digital Marketing – International Conf. on Green Business (2024)<br>• Working Paper: "Consumer Resilience in Digital Era" (Under review)</p></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Skills with animated progress bars -->
-<section id="skills" class="py-5">
-  <div class="container">
-    <div class="text-center" data-aos="fade-up"><h2 class="section-title">Core Competencies</h2></div>
+<!-- Services -->
+<section id="services" class="py-5 bg-light">
+  <div class="container text-center">
+    <h2 class="section-title">What I Offer</h2>
     <div class="row">
-      <div class="col-lg-10 mx-auto">
-        <div class="skill-item"><span>Consumer Behavior</span><div class="progress"><div class="progress-bar" data-skill="92"></div></div></div>
-        <div class="skill-item"><span>Brand Strategy</span><div class="progress"><div class="progress-bar" data-skill="88"></div></div></div>
-        <div class="skill-item"><span>Market Insights</span><div class="progress"><div class="progress-bar" data-skill="85"></div></div></div>
-        <div class="skill-item"><span>Marketing Management</span><div class="progress"><div class="progress-bar" data-skill="90"></div></div></div>
-        <div class="skill-item"><span>HTML/CSS</span><div class="progress"><div class="progress-bar" data-skill="95"></div></div></div>
-        <div class="skill-item"><span>JavaScript</span><div class="progress"><div class="progress-bar" data-skill="87"></div></div></div>
-        <div class="skill-item"><span>Bootstrap 5</span><div class="progress"><div class="progress-bar" data-skill="93"></div></div></div>
-      </div>
+      <div class="col-4"><div class="service-card"><i class="fas fa-chart-line icon-lg mb-3"></i><h4>Research & Business Analysis</h4><p>Market research, consumer behavior analytics, brand hate & sustainability studies.</p></div></div>
+      <div class="col-4"><div class="service-card"><i class="fas fa-code icon-lg mb-3"></i><h4>Web Development</h4><p>Modern responsive websites, Bootstrap, JavaScript, and full-stack solutions.</p></div></div>
+      <div class="col-4"><div class="service-card"><i class="fas fa-mobile-alt icon-lg mb-3"></i><h4>App Development</h4><p>Cross-platform mobile apps, UI/UX design, hybrid solutions.</p></div></div>
     </div>
   </div>
 </section>
 
-<!-- Portfolio / Projects Grid -->
-<section id="portfolio" class="py-5 bg-light">
+<!-- Education & Research -->
+<section id="education" class="py-5">
   <div class="container">
-    <div class="text-center" data-aos="fade-up"><h2 class="section-title">Featured Projects</h2></div>
-    <div class="row g-4 mt-2">
-      <div class="col-md-4" data-aos="flip-left"><div class="project-card"><img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=500&h=300&fit=crop" class="img-fluid" alt="Project"><div class="p-3"><h5>AI Consumer Analytics</h5><p>Dashboard for brand sentiment & hate detection using ML.</p></div></div></div>
-      <div class="col-md-4" data-aos="flip-left" data-aos-delay="100"><div class="project-card"><img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500&h=300&fit=crop" class="img-fluid" alt="Project"><div class="p-3"><h5>EcoMarketer Platform</h5><p>Sustainable marketing toolkit for green brands.</p></div></div></div>
-      <div class="col-md-4" data-aos="flip-left" data-aos-delay="200"><div class="project-card"><img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=300&fit=crop" class="img-fluid" alt="Project"><div class="p-3"><h5>SmartRetail App</h5><p>Mobile app for real-time inventory and consumer insights.</p></div></div></div>
+    <h2 class="section-title text-center" style="display: block; text-align: center;">Education & Research</h2>
+    <div class="timeline-item"><div class="timeline-icon"><i class="fas fa-graduation-cap"></i></div><div><h4>M.Phil Business Administration</h4><p>Brand Hate, Consumer Skepticism & Sustainability. Thesis on mitigating brand hate.</p><small>2022 – Present</small></div></div>
+    <div class="timeline-item"><div class="timeline-icon"><i class="fas fa-chart-line"></i></div><div><h4>MBA Finance</h4><p>Gold medalist, corporate finance, investment analysis.</p><small>2018 – 2020</small></div></div>
+    <div class="timeline-item"><div class="timeline-icon"><i class="fas fa-book-open"></i></div><div><h4>Publications</h4><p>• Brand Hate & Consumer Skepticism – Journal of Marketing Insights (2023)<br>• Sustainability in Digital Marketing – Green Business Conf. (2024)</p></div></div>
+  </div>
+</section>
+
+<!-- Skills -->
+<section id="skills" class="py-5 bg-light">
+  <div class="container">
+    <h2 class="section-title text-center" style="display: block; text-align: center;">Core Competencies</h2>
+    <div style="max-width: 700px; margin: 0 auto;">
+      <div class="skill-item"><span>Consumer Behavior</span><div class="progress"><div class="progress-bar" data-skill="92"></div></div></div>
+      <div class="skill-item"><span>Brand Strategy</span><div class="progress"><div class="progress-bar" data-skill="88"></div></div></div>
+      <div class="skill-item"><span>Market Insights</span><div class="progress"><div class="progress-bar" data-skill="85"></div></div></div>
+      <div class="skill-item"><span>Marketing Management</span><div class="progress"><div class="progress-bar" data-skill="90"></div></div></div>
+      <div class="skill-item"><span>HTML/CSS</span><div class="progress"><div class="progress-bar" data-skill="95"></div></div></div>
+      <div class="skill-item"><span>JavaScript</span><div class="progress"><div class="progress-bar" data-skill="87"></div></div></div>
+      <div class="skill-item"><span>Bootstrap</span><div class="progress"><div class="progress-bar" data-skill="93"></div></div></div>
     </div>
   </div>
 </section>
 
-<!-- VU Projects: All Projects - Virtual University -->
-<section id="vu-projects" class="py-5">
-  <div class="container">
-    <div class="text-center" data-aos="fade-up"><h2 class="section-title">All Projects - Virtual University</h2></div>
-    <div class="row g-4">
-      <div class="col-md-4" data-aos="fade-up" data-aos-delay="50"><div class="vu-card p-4 shadow-sm rounded-4 bg-white"><i class="fas fa-database fs-1 mb-3" style="color:#0d47a1;"></i><h4>VU Academic Portal</h4><p>Complete clone of VU LMS interface with real-time notifications.</p><span class="badge bg-primary">Research Integration</span></div></div>
-      <div class="col-md-4" data-aos="fade-up" data-aos-delay="100"><div class="vu-card p-4 shadow-sm rounded-4 bg-white"><i class="fas fa-chalkboard-user fs-1 mb-3" style="color:#0d47a1;"></i><h4>Quiz Automation System</h4><p>Automated quiz generator, past paper analysis tool.</p><span class="badge bg-primary">VU Special</span></div></div>
-      <div class="col-md-4" data-aos="fade-up" data-aos-delay="150"><div class="vu-card p-4 shadow-sm rounded-4 bg-white"><i class="fas fa-chart-simple fs-1 mb-3" style="color:#0d47a1;"></i><h4>GDB Analyzer</h4><p>Graded discussion board analytics and solution framework.</p><span class="badge bg-primary">80-100% Guarantee</span></div></div>
+<!-- Portfolio -->
+<section id="portfolio" class="py-5">
+  <div class="container text-center">
+    <h2 class="section-title">Featured Projects</h2>
+    <div class="row">
+      <div class="col-4"><div class="project-card"><img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=500&h=300&fit=crop" alt="project"><div class="p-3"><h5>AI Consumer Analytics</h5><p>Brand sentiment & hate detection using ML.</p></div></div></div>
+      <div class="col-4"><div class="project-card"><img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500&h=300&fit=crop" alt="project"><div class="p-3"><h5>EcoMarketer Platform</h5><p>Sustainable marketing toolkit.</p></div></div></div>
+      <div class="col-4"><div class="project-card"><img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=300&fit=crop" alt="project"><div class="p-3"><h5>SmartRetail App</h5><p>Real-time inventory & insights.</p></div></div></div>
     </div>
   </div>
 </section>
 
-<!-- VU LMS Handling Pricing Cards -->
-<section id="vu-lms" class="py-5 bg-light">
-  <div class="container">
-    <div class="text-center" data-aos="fade-up"><h2 class="section-title">VU LMS Handling</h2><p class="mb-4">Professional support for VU students — <strong class="text-warning">80-100% Marks Guaranteed</strong></p></div>
-    <div class="row g-4">
-      <div class="col-md-3 col-sm-6" data-aos="zoom-in"><div class="price-card"><i class="fas fa-comments fa-2x mb-3" style="color:#0d47a1;"></i><h4>GDB</h4><p>Well-researched solutions, references & formatting.</p><span class="badge bg-gold badge-gold mt-2">⭐⭐⭐⭐⭐</span><div class="mt-3 small text-muted">100% original</div></div></div>
-      <div class="col-md-3 col-sm-6" data-aos="zoom-in" data-aos-delay="100"><div class="price-card"><i class="fas fa-question-circle fa-2x mb-3" style="color:#0d47a1;"></i><h4>Quiz</h4><p>Conceptual quiz prep, practice sets, high accuracy.</p><span class="badge bg-gold badge-gold mt-2">Guaranteed A+</span></div></div>
-      <div class="col-md-3 col-sm-6" data-aos="zoom-in" data-aos-delay="200"><div class="price-card"><i class="fas fa-file-alt fa-2x mb-3" style="color:#0d47a1;"></i><h4>Assignment</h4><p>Plagiarism-free, formatted, timely submission.</p><span class="badge bg-gold badge-gold mt-2">90%+ Marks</span></div></div>
-      <div class="col-md-3 col-sm-6" data-aos="zoom-in" data-aos-delay="300"><div class="price-card"><i class="fas fa-calendar-week fa-2x mb-3" style="color:#0d47a1;"></i><h4>Half Semester Handling</h4><p>Complete support for GDBs, quizzes, assignments, midterm prep.</p><span class="badge bg-gold badge-gold mt-2">Package Deal</span><div class="mt-2 fw-bold text-dark">80-100% Marks Guaranteed</div></div></div>
+<!-- VU Projects -->
+<section id="vu-projects" class="py-5 bg-light">
+  <div class="container text-center">
+    <h2 class="section-title">All Projects - Virtual University</h2>
+    <div class="row">
+      <div class="col-4"><div class="vu-card"><i class="fas fa-database fa-2x mb-3" style="color:#0d47a1;"></i><h4>VU Academic Portal</h4><p>LMS clone with real-time notifications.</p></div></div>
+      <div class="col-4"><div class="vu-card"><i class="fas fa-chalkboard-user fa-2x mb-3" style="color:#0d47a1;"></i><h4>Quiz Automation System</h4><p>Auto quiz generator & past paper analysis.</p></div></div>
+      <div class="col-4"><div class="vu-card"><i class="fas fa-chart-simple fa-2x mb-3" style="color:#0d47a1;"></i><h4>GDB Analyzer</h4><p>Graded discussion board solution framework.</p></div></div>
     </div>
-    <div class="text-center mt-3"><small class="text-muted">*Trusted by 500+ VU students | Results proven</small></div>
   </div>
 </section>
 
-<!-- Testimonials Carousel -->
-<section id="testimonials" class="py-5">
-  <div class="container">
-    <div class="text-center" data-aos="fade-up"><h2 class="section-title">Client Testimonials</h2></div>
-    <div id="testimonialCarousel" class="carousel slide mt-4" data-bs-ride="carousel">
+<!-- VU LMS Handling -->
+<section id="vu-lms" class="py-5">
+  <div class="container text-center">
+    <h2 class="section-title">VU LMS Handling</h2>
+    <p class="mb-4"><strong class="text-warning">80-100% Marks Guaranteed</strong></p>
+    <div class="row">
+      <div class="col-3"><div class="price-card"><i class="fas fa-comments fa-2x mb-2"></i><h4>GDB</h4><p>Well-researched solutions</p><span style="background:#ffb300; padding:4px 12px; border-radius:20px;">100% original</span></div></div>
+      <div class="col-3"><div class="price-card"><i class="fas fa-question-circle fa-2x mb-2"></i><h4>Quiz</h4><p>High accuracy prep</p><span style="background:#ffb300; padding:4px 12px; border-radius:20px;">A+ Guarantee</span></div></div>
+      <div class="col-3"><div class="price-card"><i class="fas fa-file-alt fa-2x mb-2"></i><h4>Assignment</h4><p>Plagiarism-free, timely</p><span style="background:#ffb300; padding:4px 12px; border-radius:20px;">90%+ Marks</span></div></div>
+      <div class="col-3"><div class="price-card"><i class="fas fa-calendar-week fa-2x mb-2"></i><h4>Half Semester Pack</h4><p>Full support + midterm prep</p><span style="background:#ffb300; padding:4px 12px; border-radius:20px;">Best Value</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Carousel (manual) -->
+<section id="testimonials" class="py-5 bg-light">
+  <div class="container text-center">
+    <h2 class="section-title">Client Testimonials</h2>
+    <div class="carousel" id="testiCarousel">
       <div class="carousel-inner">
-        <div class="carousel-item active text-center"><div class="bg-white p-5 rounded-4 shadow-sm mx-auto" style="max-width: 700px;"><i class="fas fa-quote-left fa-2x text-warning mb-3"></i><p class="fs-5">"Mehwish transformed our digital presence and research strategy. Her insights into consumer skepticism boosted our brand trust metrics by 40%."</p><h5 class="mt-3">— Sarah Khan, Marketing Director</h5></div></div>
-        <div class="carousel-item text-center"><div class="bg-white p-5 rounded-4 shadow-sm mx-auto" style="max-width: 700px;"><i class="fas fa-quote-left fa-2x text-warning mb-3"></i><p class="fs-5">"VU assignment support was exceptional — scored 94% in a tough course. Reliable and highly professional. Highly recommend her LMS handling."</p><h5 class="mt-3">— Bilal Ahmed, VU Student</h5></div></div>
-        <div class="carousel-item text-center"><div class="bg-white p-5 rounded-4 shadow-sm mx-auto" style="max-width: 700px;"><i class="fas fa-quote-left fa-2x text-warning mb-3"></i><p class="fs-5">"Her web development skills are top-notch. Delivered a fully responsive business site ahead of schedule with clean code."</p><h5 class="mt-3">— Fatima Zafar, Startup Founder</h5></div></div>
+        <div class="carousel-item active"><i class="fas fa-quote-left fa-2x text-warning mb-3"></i><p>"Mehwish transformed our digital presence. Brand trust increased by 40%."</p><h5>— Sarah Khan</h5></div>
+        <div class="carousel-item"><i class="fas fa-quote-left fa-2x text-warning mb-3"></i><p>"VU assignment support was exceptional – scored 94% in a tough course."</p><h5>— Bilal Ahmed</h5></div>
+        <div class="carousel-item"><i class="fas fa-quote-left fa-2x text-warning mb-3"></i><p>"Her web development skills are top-notch. Delivered ahead of schedule."</p><h5>— Fatima Zafar</h5></div>
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon bg-dark rounded-circle p-2" aria-hidden="true"></span></button>
-      <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next"><span class="carousel-control-next-icon bg-dark rounded-circle p-2" aria-hidden="true"></span></button>
+      <button class="carousel-control prev" id="prevBtn">‹</button>
+      <button class="carousel-control next" id="nextBtn">›</button>
     </div>
   </div>
 </section>
 
-<!-- Contact Section + WhatsApp/Phone -->
-<section id="contact" class="py-5 bg-light">
+<!-- Contact -->
+<section id="contact" class="py-5">
   <div class="container">
-    <div class="text-center" data-aos="fade-up"><h2 class="section-title">Let’s Connect</h2></div>
-    <div class="row g-5 mt-2">
-      <div class="col-md-6" data-aos="fade-right">
-        <div class="bg-white p-4 rounded-4 shadow-sm">
+    <h2 class="section-title text-center" style="display: block; text-align: center;">Let’s Connect</h2>
+    <div class="row" style="justify-content: center;">
+      <div class="col-6" style="min-width: 280px;">
+        <div style="background: white; padding: 1.5rem; border-radius: 24px; box-shadow: 0 10px 25px rgba(0,0,0,0.05);">
           <h4><i class="fas fa-phone-alt text-primary"></i> Direct Contact</h4>
-          <p class="mt-3"><i class="fab fa-whatsapp text-success me-2"></i> WhatsApp: <strong>03184148783</strong> | <strong>03171491481</strong> | <strong>03069080308</strong></p>
-          <p><i class="fas fa-envelope text-primary me-2"></i> mehwish.consultant@example.com</p>
-          <hr>
-          <h5>Office Hours</h5>
-          <p>Mon-Fri: 10am - 7pm (PKT) | Online support available.</p>
-          <div class="mt-3 d-flex gap-3 flex-wrap">
-            <a href="https://wa.me/923184148783?text=Hi%20Mehwish,%20I%20need%20consultation" class="btn btn-outline-gold" target="_blank"><i class="fab fa-whatsapp"></i> Chat 03184148783</a>
-            <a href="https://wa.me/923171491481?text=Hi%20Mehwish,%20I%20need%20help" class="btn btn-outline-secondary" target="_blank"><i class="fab fa-whatsapp"></i> 03171491481</a>
-          </div>
+          <p><i class="fab fa-whatsapp text-success"></i> <strong>03184148783</strong> | 03171491481 | 03069080308</p>
+          <p><i class="fas fa-envelope text-primary"></i> mehwish.consultant@example.com</p>
+          <a href="https://wa.me/923184148783" class="btn-outline-gold" target="_blank" style="display: inline-block; margin-top: 1rem;"><i class="fab fa-whatsapp"></i> WhatsApp Now</a>
         </div>
       </div>
-      <div class="col-md-6" data-aos="fade-left">
-        <div class="bg-white p-4 rounded-4 shadow-sm">
+      <div class="col-6" style="min-width: 280px;">
+        <div style="background: white; padding: 1.5rem; border-radius: 24px; box-shadow: 0 10px 25px rgba(0,0,0,0.05);">
           <h4><i class="fas fa-paper-plane"></i> Send Message</h4>
           <form id="contactForm">
-            <div class="mb-3"><input type="text" id="name" class="form-control" placeholder="Full Name"></div>
-            <div class="mb-3"><input type="email" id="email" class="form-control" placeholder="Email Address"></div>
-            <div class="mb-3"><textarea id="message" rows="4" class="form-control" placeholder="Your message..."></textarea></div>
-            <button type="submit" class="btn btn-gold">Submit <i class="fas fa-arrow-right"></i></button>
+            <input type="text" id="name" placeholder="Full Name" style="width:100%; padding: 10px; margin-bottom: 1rem; border-radius: 30px; border:1px solid #ddd;">
+            <input type="email" id="email" placeholder="Email" style="width:100%; padding: 10px; margin-bottom: 1rem; border-radius: 30px; border:1px solid #ddd;">
+            <textarea id="message" rows="3" placeholder="Message" style="width:100%; padding: 10px; border-radius: 20px; border:1px solid #ddd;"></textarea>
+            <button type="submit" class="btn-gold" style="margin-top: 1rem;">Submit</button>
             <div id="formFeedback" class="mt-2 small"></div>
           </form>
         </div>
@@ -481,88 +509,71 @@
 </section>
 
 <!-- Footer -->
-<footer class="pt-5 pb-4">
+<footer>
   <div class="container">
     <div class="row">
-      <div class="col-md-4"><h4>Mehwish<span style="color:#ffb300;">.</span></h4><p>Researcher | Marketer | Developer bridging business & technology.</p></div>
-      <div class="col-md-4"><h5>Quick Links</h5><ul class="list-unstyled"><li><a href="#home" class="text-white-50 text-decoration-none">Home</a></li><li><a href="#about" class="text-white-50 text-decoration-none">About</a></li><li><a href="#services" class="text-white-50 text-decoration-none">Services</a></li><li><a href="#vu-lms" class="text-white-50 text-decoration-none">LMS Support</a></li></ul></div>
-      <div class="col-md-4"><h5>Follow</h5><div><a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a><a href="#" class="social-icon"><i class="fab fa-twitter"></i></a><a href="#" class="social-icon"><i class="fab fa-github"></i></a></div><p class="mt-3"><i class="fas fa-phone-alt me-2"></i> +92 318 4148783</p></div>
+      <div class="col-4"><h4>Mehwish<span style="color:#ffb300;">.</span></h4><p>Researcher | Marketer | Developer</p></div>
+      <div class="col-4"><h5>Quick Links</h5><ul style="list-style:none;"><li><a href="#home" class="text-white-50">Home</a></li><li><a href="#about" class="text-white-50">About</a></li><li><a href="#services" class="text-white-50">Services</a></li></ul></div>
+      <div class="col-4"><h5>Follow</h5><a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a><a href="#" class="social-icon"><i class="fab fa-twitter"></i></a><a href="#" class="social-icon"><i class="fab fa-github"></i></a></div>
     </div>
-    <hr class="bg-secondary mt-4"><div class="text-center pt-2"><small>© 2025 Mehwish | All Rights Reserved | Designed with <i class="fas fa-heart text-danger"></i> for excellence.</small></div>
+    <hr><div class="text-center"><small>© 2025 Mehwish | All Rights Reserved</small></div>
   </div>
 </footer>
 
-<!-- Scripts: Bootstrap, AOS, and custom -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-  // Initialize AOS
-  AOS.init({ duration: 800, once: true, offset: 100 });
-  
-  // Navbar scroll effect
-  window.addEventListener('scroll', function() {
+  // Navbar scroll + mobile menu
+  window.addEventListener('scroll', () => {
     const nav = document.getElementById('mainNav');
     if (window.scrollY > 50) nav.classList.add('scrolled');
     else nav.classList.remove('scrolled');
   });
-  
-  // Smooth scroll for anchor links
+  const toggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+  if(toggle) toggle.onclick = () => navLinks.classList.toggle('show');
+  // Smooth scroll
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      if(target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
     });
   });
-  
-  // Animated progress bars (Intersection Observer)
+  // Progress bars
   const progressBars = document.querySelectorAll('.progress-bar');
-  const animateSkills = () => {
-    progressBars.forEach(bar => {
-      const percent = bar.getAttribute('data-skill');
-      if (percent && bar.style.width === '0px' || bar.style.width === '' || parseFloat(bar.style.width) === 0) {
-        bar.style.width = percent + '%';
-      }
-    });
-  };
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        animateSkills();
+      if(entry.isIntersecting) {
+        progressBars.forEach(bar => { let w = bar.getAttribute('data-skill'); if(w) bar.style.width = w+'%'; });
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.3 });
-  const skillsSection = document.getElementById('skills');
-  if (skillsSection) observer.observe(skillsSection);
-  
-  // Also trigger on load if visible
-  window.addEventListener('load', () => {
-    if (skillsSection && skillsSection.getBoundingClientRect().top < window.innerHeight) animateSkills();
-  });
-  
-  // Contact Form Validation
+  }, { threshold: 0.4 });
+  const skillsSec = document.getElementById('skills');
+  if(skillsSec) observer.observe(skillsSec);
+  // Manual carousel
+  let current = 0;
+  const items = document.querySelectorAll('.carousel-item');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  function showSlide(index) {
+    items.forEach((item,i) => item.classList.toggle('active', i===index));
+  }
+  if(prevBtn && nextBtn) {
+    prevBtn.onclick = () => { current = (current-1+items.length)%items.length; showSlide(current); };
+    nextBtn.onclick = () => { current = (current+1)%items.length; showSlide(current); };
+  }
+  // Contact form validation
   const form = document.getElementById('contactForm');
   const feedback = document.getElementById('formFeedback');
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const name = document.getElementById('name').value.trim();
     const email = document.getElementById('email').value.trim();
-    const message = document.getElementById('message').value.trim();
-    if (!name || !email || !message) {
-      feedback.innerHTML = '<span class="text-danger">All fields are required!</span>';
-      return;
-    }
-    const emailPattern = /^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/;
-    if (!emailPattern.test(email)) {
-      feedback.innerHTML = '<span class="text-danger">Enter a valid email address.</span>';
-      return;
-    }
-    feedback.innerHTML = '<span class="text-success">✅ Message sent! Mehwish will contact you soon.</span>';
+    const msg = document.getElementById('message').value.trim();
+    if(!name || !email || !msg) { feedback.innerHTML = '<span style="color:red;">All fields required</span>'; return; }
+    if(!/^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/.test(email)) { feedback.innerHTML = '<span style="color:red;">Valid email required</span>'; return; }
+    feedback.innerHTML = '<span style="color:green;">✅ Message sent! Mehwish will contact you soon.</span>';
     form.reset();
-    setTimeout(() => feedback.innerHTML = '', 4000);
+    setTimeout(() => feedback.innerHTML='',4000);
   });
 </script>
 </body>
